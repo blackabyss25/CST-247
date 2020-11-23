@@ -1,0 +1,35 @@
+﻿@model List<Activity2Part1.Models.UserModel>
+
+@{
+    ViewBag.Title = "My App";
+    Layout = "~/Views/Shared/_MyDefaultLayout.cshtml";
+}
+
+
+<div>
+    @Html.Label("Welcome", "Welcome to Razor", new { style = "text: align: center; font-size: 24px; font-weight: bold; font-family: Arial;" })
+    <br />
+    @Html.Label("Message", "My Customers are: ", new { style = "text: align: left; font-size: 18px; font-weight: bold; font-family: Arial;" })
+    <br />
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email Address</th>
+                <th>Phone Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => user.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => user.Email)</td>
+                    <td>@Html.DisplayFor(modelItem => user.Phone)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @Html.ActionLink("Refresh Page", "Refresh", new { @class = "actionLink" })
+</div>

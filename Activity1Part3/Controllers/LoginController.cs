@@ -15,16 +15,17 @@ namespace Activity1Part3.Controllers
         public ActionResult Index()
         {
             return View("Login");
-            //return @"<b>Just a test from Index</b>";
         }
-
         [HttpPost]
         public ActionResult Login(UserModel model)
         {
-            SecurityService sa = new SecurityService();
-            if (sa.Authenticate(model))
+            if (!ModelState.IsValid)
+                return View("Login");
+
+            SecurityService ss = new SecurityService();
+            bool result = ss.Authenticate(model);
+            if (result)
             {
-                //Login Passed
                 return View("LoginPassed", model);
             }
             else
@@ -32,8 +33,6 @@ namespace Activity1Part3.Controllers
                 return View("LoginFailed");
             }
         }
-
-
 
     }
 }
