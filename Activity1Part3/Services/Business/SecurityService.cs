@@ -11,8 +11,9 @@ namespace Activity1Part3.Services.Business
     {
         public bool Authenticate(UserModel user)
         {
-            SecurityDAO security = new SecurityDAO();
-            return security.FindByUser(user);
+            SecurityDAO service = new SecurityDAO();
+            return service.FindByUser(user);
         }
+
     }
 }
