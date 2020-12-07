@@ -1,0 +1,41 @@
+﻿@using Activity3.Models
+@model Tuple<List<CustomerModel>, CustomerModel>
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    @using (Html.BeginForm("OnSelectCustomer","Customer"))
+    {
+        @Html.AntiForgeryToken();
+        var selected = false;
+        foreach(var customer in Model.Item1)
+        {
+            if(Model.Item2 == customer)
+            {
+                selected = true;
+            }
+            else
+            {
+                selected = false;
+            }
+            @Html.RadioButton("CustomerNumber", customer.id, selected);
+            @Html.Label(customer.name);
+            <br/>
+        }
+        <input type="submit" id="submitButton" value="Display Details"/>
+    }
+
+    <div id="customerInfo">
+        @Html.Partial("~/Views/Shared/_CustomerDetails.cshtml",Model.Item2)
+    </div>
+
+</body>
+</html>
